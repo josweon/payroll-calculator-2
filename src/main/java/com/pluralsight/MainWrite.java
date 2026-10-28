@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class MainWrite {
 
     public static void main(String[] args) {
-        try {
+
             String filePath = "src/main/resources/";
             Scanner scanner = new Scanner(System.in);
 
@@ -16,6 +16,7 @@ public class MainWrite {
             String fileName = scanner.nextLine().trim();
             String readFile = filePath + fileName;
 
+        try {
             BufferedReader bufReader = new BufferedReader(new FileReader(readFile));
 
             // write file
@@ -26,10 +27,12 @@ public class MainWrite {
 
             BufferedWriter bufWriter = new BufferedWriter(fileWriter);
 
+            bufReader.readLine();
+
             String input;
-//            bufReader.readLine();
 
             while ((input = bufReader.readLine()) != null) {
+                StringBuilder inputWriter = new StringBuilder();
                 String[] tokens = input.split(Pattern.quote("|"));
 
                 int employeeId = Integer.parseInt(tokens[0]);
@@ -38,10 +41,18 @@ public class MainWrite {
                 double payRate = Double.parseDouble(tokens[3]);
 
                 Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
+                inputWriter.append(employee.getEmployeeId());
+                inputWriter.append("|");
+                inputWriter.append(employee.getName());
+                inputWriter.append("|");
+                inputWriter.append(payRate);
+                inputWriter.append("\n");
 
+                bufWriter.write(inputWriter.toString());
             }
 
             bufReader.close();
+            bufWriter.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("ERROR - fileName not found " + e.getMessage());
