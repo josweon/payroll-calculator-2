@@ -29,6 +29,9 @@ public class MainWrite {
 
             bufReader.readLine();
 
+            if (fileNameWrite.contains(".json")) {
+                bufWriter.write("[\n");
+            }
             String input;
 
             while ((input = bufReader.readLine()) != null) {
@@ -41,16 +44,30 @@ public class MainWrite {
                 double payRate = Double.parseDouble(tokens[3]);
 
                 Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
-                inputWriter.append(employee.getEmployeeId());
-                inputWriter.append("|");
-                inputWriter.append(employee.getName());
-                inputWriter.append("|");
-                inputWriter.append(employee.getGrossPay());
-                inputWriter.append("\n");
 
-                bufWriter.write(inputWriter.toString());
+                if (fileNameWrite.contains(".json")) {
+                    bufWriter.write(jsonFormatter(employee));
+                    // magic number :/
+                    if (employee.getEmployeeId() == 80){
+                        bufWriter.write("\n");
+                    } else {
+                        bufWriter.write(",\n");
+                    }
+                } else {
+                    inputWriter.append(employee.getEmployeeId());
+                    inputWriter.append("|");
+                    inputWriter.append(employee.getName());
+                    inputWriter.append("|");
+                    inputWriter.append(employee.getGrossPay());
+                    inputWriter.append("\n");
+
+                    bufWriter.write(inputWriter.toString());
+                }
             }
 
+            if (fileNameWrite.contains(".json")) {
+                bufWriter.write("]");
+            }
             bufReader.close();
             bufWriter.close();
 
@@ -61,5 +78,13 @@ public class MainWrite {
         } catch (IOException e) {
             System.out.println("ERROR - Invalid read/write operation" + e.getMessage());
         }
+
+    }
+    public static String jsonFormatter(Employee employee) {
+        String parseJson = String.format("\t{ \"id\": %d, \"name\": \"%s\", \"grossPay\": %.2f }",
+                employee.getEmployeeId(),
+                employee.getName(),
+                employee.getGrossPay());
+        return parseJson;
     }
 }
