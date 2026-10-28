@@ -15,18 +15,18 @@ public class Main {
             bufReader.readLine();
 
             while ((input = bufReader.readLine()) != null) {
-                String[] tokens = (bufReader.readLine()).split(Pattern.quote("|"));
+                String[] tokens = input.split(Pattern.quote("|"));
 
                 int employeeId = Integer.parseInt(tokens[0]);
                 String name = tokens[1];
                 double hoursWorked = Double.parseDouble(tokens[2]);
                 double payRate = Double.parseDouble(tokens[3]);
 
-                // Test
-                System.out.println(employeeId);
-                System.out.println(name);
-                System.out.println(hoursWorked);
-                System.out.println(payRate);
+                Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
+
+                System.out.printf("emplid: %d, name: %s, gross pay: $%.2f%n",
+                        employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
+                System.out.println("---");
             }
 
         } catch (IOException e) {
