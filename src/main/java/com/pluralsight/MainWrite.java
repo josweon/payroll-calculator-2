@@ -23,8 +23,8 @@ public class MainWrite {
             System.out.print("Enter the name of the payroll file to create: ");
             String fileNameWrite = scanner.nextLine().trim();
             String writeFile = filePath + fileNameWrite;
-            FileWriter fileWriter = new FileWriter(writeFile);
 
+            FileWriter fileWriter = new FileWriter(writeFile);
             BufferedWriter bufWriter = new BufferedWriter(fileWriter);
 
             bufReader.readLine();
@@ -45,7 +45,7 @@ public class MainWrite {
                 inputWriter.append("|");
                 inputWriter.append(employee.getName());
                 inputWriter.append("|");
-                inputWriter.append(payRate);
+                inputWriter.append(employee.getGrossPay());
                 inputWriter.append("\n");
 
                 bufWriter.write(inputWriter.toString());
@@ -53,6 +53,8 @@ public class MainWrite {
 
             bufReader.close();
             bufWriter.close();
+
+            System.out.println("Success!");
 
         } catch (FileNotFoundException e) {
             System.out.println("ERROR - fileName not found " + e.getMessage());
