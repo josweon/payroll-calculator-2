@@ -17,9 +17,17 @@ public class Main {
             while ((input = bufReader.readLine()) != null) {
                 String[] tokens = (bufReader.readLine()).split(Pattern.quote("|"));
 
+                int employeeId = Integer.parseInt(tokens[0]);
+                String name = tokens[1];
+                double hoursWorked = Double.parseDouble(tokens[2]);
+                double payRate = Double.parseDouble(tokens[3]);
 
+                // Test
+                System.out.println(employeeId);
+                System.out.println(name);
+                System.out.println(hoursWorked);
+                System.out.println(payRate);
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
