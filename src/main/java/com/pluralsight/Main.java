@@ -9,7 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            BufferedReader bufReader = new BufferedReader(new FileReader("employees.csv"));
+            String fileName = "src/main/resources/employees.csv";
+            BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
 
             String input;
             bufReader.readLine();
