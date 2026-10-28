@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -32,8 +33,10 @@ public class Main {
 
             bufReader.close();
 
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR - fileName not found " + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ERROR - Invalid read/write operation" + e.getMessage());
         }
     }
 }
