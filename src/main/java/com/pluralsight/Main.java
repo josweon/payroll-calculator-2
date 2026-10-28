@@ -29,6 +29,8 @@ public class Main {
                 System.out.println("---");
             }
 
+            bufReader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
